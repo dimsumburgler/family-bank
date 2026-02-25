@@ -679,7 +679,7 @@ export default function FamilyBank() {
       </header>
 
       {/* Navigation */}
-      <nav className="bg-white border-b border-slate-200">
+      <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200">
         <div className="max-w-lg mx-auto px-4">
           <div className="flex">
             {tabs.map(tab => {
@@ -704,12 +704,12 @@ export default function FamilyBank() {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-lg mx-auto px-4 py-6 pb-24">
+      <main className="max-w-lg mx-auto px-4 py-4 pb-24">
         {activeTab === 'dashboard' && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Child Selector */}
-            <section className="py-2">
-              <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-1">
+            <section className="py-1">
+              <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 px-1">
                 {children.map(child => (
                   <ChildAvatar
                     key={child.id}

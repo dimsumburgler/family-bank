@@ -13,7 +13,7 @@ export function ChildAvatar({ child, isSelected, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`relative group transition-all duration-300 flex-shrink-0 p-1 ${isSelected ? 'scale-105' : 'hover:scale-102'}`}
+      className={`relative group transition-all duration-300 flex-shrink-0 p-2 ${isSelected ? 'scale-105' : 'hover:scale-102'}`}
     >
       <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full ${color.bg}
         flex items-center justify-center text-white text-2xl sm:text-3xl font-bold shadow-lg
@@ -34,7 +34,7 @@ export function AddChildAvatar({ onClick }) {
   return (
     <button 
       onClick={onClick}
-      className="flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity p-1"
+      className="flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity p-2"
     >
       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 hover:border-violet-400 hover:text-violet-500 transition-colors bg-slate-50">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
