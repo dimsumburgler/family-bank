@@ -653,7 +653,7 @@ export default function FamilyBank() {
 
   const tabs = [
     { id: 'dashboard', icon: Home, label: 'Home' },
-    { id: 'transactions', icon: History, label: 'History' },
+    { id: 'transactions', icon: History, label: 'Activities' },
     { id: 'goals', icon: Target, label: 'Goals' },
     { id: 'settings', icon: Settings, label: 'Settings' },
   ];
