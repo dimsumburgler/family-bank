@@ -128,7 +128,7 @@ function Toast({ message, type = 'success', onClose }) {
 
   const bgColor = type === 'success' ? 'bg-emerald-500' : 
                   type === 'error' ? 'bg-rose-500' : 
-                  type === 'celebrate' ? 'bg-amber-500' : 'bg-stone-800';
+                  type === 'celebrate' ? 'bg-violet-500' : 'bg-slate-800';
 
   return (
     <div className={`fixed top-20 left-1/2 -translate-x-1/2 z-50 ${bgColor} text-white px-6 py-3 rounded-full shadow-lg animate-in slide-in-from-top fade-in duration-300`}>
@@ -144,11 +144,11 @@ function Toast({ message, type = 'success', onClose }) {
 function EmptyState({ icon: Icon, title, subtitle, action }) {
   return (
     <div className="text-center py-12 px-4">
-      <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-stone-100 flex items-center justify-center">
-        <Icon className="w-8 h-8 text-stone-400" />
+      <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 flex items-center justify-center">
+        <Icon className="w-8 h-8 text-slate-400" />
       </div>
-      <h3 className="font-semibold text-stone-800 mb-1">{title}</h3>
-      <p className="text-sm text-stone-500 mb-4">{subtitle}</p>
+      <h3 className="font-semibold text-slate-800 mb-1">{title}</h3>
+      <p className="text-sm text-slate-500 mb-4">{subtitle}</p>
       {action}
     </div>
   );
@@ -197,29 +197,29 @@ function GoalCard({ goal, child, onAdd, onCelebrate, onDelete }) {
   }, [isComplete, goal, onCelebrate]);
 
   return (
-    <div className={`bg-white rounded-2xl p-5 border transition-all duration-300 ${isComplete ? 'border-amber-300 shadow-md' : 'border-stone-100'}`}>
+    <div className={`bg-white rounded-2xl p-5 border transition-all duration-300 ${isComplete ? 'border-violet-300 shadow-md' : 'border-slate-100'}`}>
       <div className="flex items-center gap-3 mb-4">
-        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${isComplete ? 'bg-amber-100' : 'bg-stone-100'}`}>
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${isComplete ? 'bg-violet-100' : 'bg-slate-100'}`}>
           {isComplete ? '🎉' : goal.icon}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-stone-800 truncate">{goal.name}</h3>
-          <p className="text-sm text-stone-500">{child?.name}</p>
+          <h3 className="font-semibold text-slate-800 truncate">{goal.name}</h3>
+          <p className="text-sm text-slate-500">{child?.name}</p>
         </div>        
         <div className="flex items-center gap-2">
-          <div className={`font-semibold ${isComplete ? 'text-amber-600' : 'text-stone-800'}`}>
+          <div className={`font-semibold ${isComplete ? 'text-violet-600' : 'text-slate-800'}`}>
             {Math.round(progress)}%
           </div>
           <div className="relative">
             <button 
               onClick={() => setShowActions(!showActions)}
-              className="p-1 hover:bg-stone-100 rounded-lg"
+              className="p-1 hover:bg-slate-100 rounded-lg"
             >
-              <MoreVertical className="w-4 h-4 text-stone-400" />
+              <MoreVertical className="w-4 h-4 text-slate-400" />
             </button>
             {showActions && (
               <>
-                <div className="absolute right-0 top-full mt-1 bg-white rounded-xl shadow-lg border border-stone-200 py-1 z-10 min-w-[120px]">
+                <div className="absolute right-0 top-full mt-1 bg-white rounded-xl shadow-lg border border-slate-200 py-1 z-10 min-w-[120px]">
                   <button
                     onClick={() => {
                       onDelete(goal.id);
@@ -238,17 +238,17 @@ function GoalCard({ goal, child, onAdd, onCelebrate, onDelete }) {
         </div>
       </div>
       
-      <div className="h-2 bg-stone-100 rounded-full overflow-hidden mb-4">
+      <div className="h-2 bg-slate-100 rounded-full overflow-hidden mb-4">
         <div 
-          className={`h-full rounded-full transition-all duration-500 ${isComplete ? 'bg-amber-500' : 'bg-amber-500'}`}
+          className={`h-full rounded-full transition-all duration-500 ${isComplete ? 'bg-violet-500' : 'bg-violet-500'}`}
           style={{ width: `${progress}%` }}
         />
       </div>
       
       <div className="flex items-center justify-between">
-        <span className="text-sm text-stone-500">
+        <span className="text-sm text-slate-500">
           {isComplete ? (
-            <span className="text-amber-600 font-medium">Goal reached! 🎉</span>
+            <span className="text-violet-600 font-medium">Goal reached! 🎉</span>
           ) : (
             `$${goal.currentAmount} of $${goal.targetAmount}`
           )}
@@ -257,7 +257,7 @@ function GoalCard({ goal, child, onAdd, onCelebrate, onDelete }) {
         {!isComplete && (
           <button
             onClick={() => onAdd(goal.id, 5)}
-            className="px-4 py-2 bg-amber-500 text-white text-sm font-medium rounded-lg hover:bg-amber-600 active:scale-95 transition-all"
+            className="px-4 py-2 bg-violet-500 text-white text-sm font-medium rounded-lg hover:bg-violet-600 active:scale-95 transition-all"
           >
             +$5
           </button>
@@ -278,7 +278,7 @@ function TransactionItem({ transaction, child, onEdit, onDelete, showChild = fal
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
           transaction.type === 'deposit' ? 'bg-emerald-50 text-emerald-600' :
           transaction.type === 'withdrawal' ? 'bg-rose-50 text-rose-600' :
-          'bg-amber-50 text-amber-600'
+          'bg-violet-50 text-violet-600'
         }`}
         >
           {transaction.type === 'deposit' ? <Plus className="w-5 h-5" /> :
@@ -286,8 +286,8 @@ function TransactionItem({ transaction, child, onEdit, onDelete, showChild = fal
            <TrendingUp className="w-5 h-5" />}
         </div>
         <div>
-          <div className="font-medium text-stone-800">{transaction.note}</div>
-          <div className="text-sm text-stone-400 flex items-center gap-2">
+          <div className="font-medium text-slate-800">{transaction.note}</div>
+          <div className="text-sm text-slate-400 flex items-center gap-2">
             {transaction.date}
             {category && (
               <span className="flex items-center gap-1">
@@ -306,26 +306,26 @@ function TransactionItem({ transaction, child, onEdit, onDelete, showChild = fal
           {transaction.type === 'withdrawal' ? '-' : '+'}${transaction.amount.toFixed(2)}
         </div>
         {showChild && (
-          <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center text-xs font-medium text-amber-700">
+          <div className="w-6 h-6 rounded-full bg-violet-100 flex items-center justify-center text-xs font-medium text-violet-700">
             {child?.name[0]}
           </div>
         )}
         <div className="relative opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
             onClick={() => setShowActions(!showActions)}
-            className="p-1 hover:bg-stone-100 rounded-lg"
+            className="p-1 hover:bg-slate-100 rounded-lg"
           >
-            <MoreVertical className="w-4 h-4 text-stone-400" />
+            <MoreVertical className="w-4 h-4 text-slate-400" />
           </button>
           {showActions && (
             <>
-              <div className="absolute right-0 top-full mt-1 bg-white rounded-xl shadow-lg border border-stone-200 py-1 z-10 min-w-[120px]">
+              <div className="absolute right-0 top-full mt-1 bg-white rounded-xl shadow-lg border border-slate-200 py-1 z-10 min-w-[120px]">
                 <button
                   onClick={() => {
                     onEdit(transaction);
                     setShowActions(false);
                   }}
-                  className="w-full px-4 py-2 text-left text-sm text-stone-700 hover:bg-stone-50 flex items-center gap-2"
+                  className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
                 >
                   <Edit2 className="w-4 h-4" />
                   Edit
@@ -357,23 +357,23 @@ function ChildSelector({ children, selectedChild, onSelect, label }) {
   
   return (
     <div className="relative">
-      {label && <label className="block text-sm text-stone-500 mb-2">{label}</label>}
+      {label && <label className="block text-sm text-slate-500 mb-2">{label}</label>}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-3 bg-stone-100 rounded-xl text-stone-800"
+        className="w-full flex items-center justify-between p-3 bg-slate-100 rounded-xl text-slate-800"
       >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm">
+          <div className="w-8 h-8 rounded-full bg-violet-500 flex items-center justify-center text-white font-bold text-sm">
             {selected?.name[0]}
           </div>
           <span className="font-medium">{selected?.name}</span>
         </div>
-        <ChevronDown className={`w-5 h-5 text-stone-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       
       {isOpen && (
         <>
-          <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-lg border border-stone-200 py-2 z-20">
+          <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-lg border border-slate-200 py-2 z-20">
             {children.map(child => (
               <button
                 key={child.id}
@@ -381,14 +381,14 @@ function ChildSelector({ children, selectedChild, onSelect, label }) {
                   onSelect(child.id);
                   setIsOpen(false);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-stone-50 ${selectedChild === child.id ? 'bg-amber-50' : ''}`}
+                className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-50 ${selectedChild === child.id ? 'bg-violet-50' : ''}`}
               >
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                  selectedChild === child.id ? 'bg-amber-500' : 'bg-stone-400'
+                  selectedChild === child.id ? 'bg-violet-500' : 'bg-slate-400'
                 }`}>
                   {child.name[0]}
                 </div>
-                <span className={`${selectedChild === child.id ? 'font-medium text-amber-700' : 'text-stone-700'}`}>
+                <span className={`${selectedChild === child.id ? 'font-medium text-violet-700' : 'text-slate-700'}`}>
                   {child.name}
                 </span>
                 {selectedChild === child.id && <Check className="w-4 h-4 text-amber-500 ml-auto" />}
@@ -659,27 +659,27 @@ export default function FamilyBank() {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Toast */}
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
 
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-stone-200">
+      <header className="sticky top-0 z-40 bg-white border-b border-slate-200">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-violet-500 flex items-center justify-center">
               <PiggyBank className="w-4 h-4 text-white" />
             </div>
-            <span className="font-semibold text-stone-800">Family Bank</span>
+            <span className="font-semibold text-slate-800">Family Bank</span>
           </div>
-          <button className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center">
-            <User className="w-4 h-4 text-stone-500" />
+          <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+            <User className="w-4 h-4 text-slate-500" />
           </button>
         </div>
       </header>
 
       {/* Navigation */}
-      <nav className="bg-white border-b border-stone-200">
+      <nav className="bg-white border-b border-slate-200">
         <div className="max-w-lg mx-auto px-4">
           <div className="flex">
             {tabs.map(tab => {
@@ -689,7 +689,7 @@ export default function FamilyBank() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 flex flex-col items-center py-3 transition-colors ${
-                    isActive ? 'text-amber-600' : 'text-stone-400 hover:text-stone-600'
+                    isActive ? 'text-violet-600' : 'text-slate-400 hover:text-slate-600'
                   }`}
                 >
                   <tab.icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''} transition-transform`} />
@@ -723,35 +723,35 @@ export default function FamilyBank() {
             </section>
 
             {/* Featured Balance */}
-            <section className="bg-amber-500 rounded-3xl p-6 text-white">
-              <div className="flex items-center gap-2 text-amber-100 mb-2">
+            <section className="bg-violet-500 rounded-3xl p-6 text-white">
+              <div className="flex items-center gap-2 text-violet-100 mb-2">
                 <Wallet className="w-4 h-4" />
                 <span className="text-sm">Available Balance</span>
               </div>
               <div className="text-4xl font-bold mb-1">
                 <AnimatedNumber value={currentChild?.balance || 0} prefix="$" />
               </div>
-              <div className="text-amber-100 text-sm">{currentChild?.name}'s money</div>
+              <div className="text-violet-100 text-sm">{currentChild?.name}'s money</div>
             </section>
 
             {/* Secondary Stats */}
             <section className="grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-2xl p-4 border border-stone-200">
-                <div className="flex items-center gap-2 text-stone-500 mb-2">
+              <div className="bg-white rounded-2xl p-4 border border-slate-200">
+                <div className="flex items-center gap-2 text-slate-500 mb-2">
                   <SavingsIcon className="w-4 h-4" />
                   <span className="text-sm">Saved</span>
                 </div>
-                <div className="text-2xl font-semibold text-stone-800">
+                <div className="text-2xl font-semibold text-slate-800">
                   ${getTotalSaved(selectedChild).toFixed(0)}
                 </div>
               </div>
               
-              <div className="bg-white rounded-2xl p-4 border border-stone-200">
-                <div className="flex items-center gap-2 text-stone-500 mb-2">
+              <div className="bg-white rounded-2xl p-4 border border-slate-200">
+                <div className="flex items-center gap-2 text-slate-500 mb-2">
                   <TrendingUp className="w-4 h-4" />
                   <span className="text-sm">Interest</span>
                 </div>
-                <div className="text-2xl font-semibold text-stone-800">{settings.interestRate}%</div>
+                <div className="text-2xl font-semibold text-slate-800">{settings.interestRate}%</div>
               </div>
             </section>
 
@@ -759,7 +759,7 @@ export default function FamilyBank() {
             <section className="grid grid-cols-2 gap-4">
               <button 
                 onClick={() => setShowDepositModal(true)}
-                className="flex items-center justify-center gap-2 py-4 bg-stone-800 text-white rounded-2xl font-medium hover:bg-stone-900 active:scale-95 transition-all"
+                className="flex items-center justify-center gap-2 py-4 bg-slate-800 text-white rounded-2xl font-medium hover:bg-slate-900 active:scale-95 transition-all"
               >
                 <Plus className="w-5 h-5" />
                 Add Money
@@ -767,7 +767,7 @@ export default function FamilyBank() {
               
               <button 
                 onClick={() => setShowWithdrawModal(true)}
-                className="flex items-center justify-center gap-2 py-4 bg-white text-stone-800 border border-stone-200 rounded-2xl font-medium hover:bg-stone-50 active:scale-95 transition-all"
+                className="flex items-center justify-center gap-2 py-4 bg-white text-slate-800 border border-slate-200 rounded-2xl font-medium hover:bg-slate-50 active:scale-95 transition-all"
               >
                 <Minus className="w-5 h-5" />
                 Spend
@@ -777,10 +777,10 @@ export default function FamilyBank() {
             {/* Goals Preview */}
             <section>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-stone-800">Goals</h2>
+                <h2 className="font-semibold text-slate-800">Goals</h2>
                 <button 
                   onClick={() => setActiveTab('goals')}
-                  className="text-sm text-amber-600 font-medium"
+                  className="text-sm text-violet-600 font-medium"
                 >
                   See all
                 </button>
@@ -800,7 +800,7 @@ export default function FamilyBank() {
                   ))}
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-stone-200">
+                <div className="bg-white rounded-2xl border border-slate-200">
                   <EmptyState
                     icon={Target}
                     title="No goals yet"
@@ -808,7 +808,7 @@ export default function FamilyBank() {
                     action={
                       <button 
                         onClick={() => setActiveTab('goals')}
-                        className="px-4 py-2 bg-amber-500 text-white text-sm font-medium rounded-lg"
+                        className="px-4 py-2 bg-violet-500 text-white text-sm font-medium rounded-lg"
                       >
                         Create Goal
                       </button>
@@ -821,19 +821,19 @@ export default function FamilyBank() {
             {/* Recent Activity */}
             <section>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-stone-800">Recent</h2>
+                <h2 className="font-semibold text-slate-800">Recent</h2>
                 <button 
                   onClick={() => setActiveTab('transactions')}
-                  className="text-sm text-amber-600 font-medium"
+                  className="text-sm text-violet-600 font-medium"
                 >
                   See all
                 </button>
               </div>
               
               {childTransactions.length > 0 ? (
-                <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
                   {childTransactions.slice(0, 3).map((t, i) => (
-                    <div key={t.id} className={i !== 0 ? 'border-t border-stone-100' : ''}>
+                    <div key={t.id} className={i !== 0 ? 'border-t border-slate-100' : ''}>
                       <TransactionItem
                         transaction={t}
                         child={currentChild}
@@ -844,7 +844,7 @@ export default function FamilyBank() {
                   ))}
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-stone-200">
+                <div className="bg-white rounded-2xl border border-slate-200">
                   <EmptyState
                     icon={History}
                     title="No transactions"
@@ -859,10 +859,10 @@ export default function FamilyBank() {
         {activeTab === 'goals' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h1 className="text-xl font-bold text-stone-800">Savings Goals</h1>
+              <h1 className="text-xl font-bold text-slate-800">Savings Goals</h1>
               <button 
                 onClick={() => showToast('Create goal coming soon!')}
-                className="px-4 py-2 bg-amber-500 text-white text-sm font-medium rounded-lg"
+                className="px-4 py-2 bg-violet-500 text-white text-sm font-medium rounded-lg"
               >
                 + New Goal
               </button>
@@ -882,7 +882,7 @@ export default function FamilyBank() {
                 ))}
               </div>
             ) : (
-              <div className="bg-white rounded-2xl border border-stone-200">
+              <div className="bg-white rounded-2xl border border-slate-200">
                 <EmptyState
                   icon={Target}
                   title="No goals yet"
@@ -890,7 +890,7 @@ export default function FamilyBank() {
                   action={
                     <button 
                       onClick={() => showToast('Create goal coming soon!')}
-                      className="px-4 py-2 bg-amber-500 text-white text-sm font-medium rounded-lg"
+                      className="px-4 py-2 bg-violet-500 text-white text-sm font-medium rounded-lg"
                     >
                       Create Goal
                     </button>
@@ -903,18 +903,18 @@ export default function FamilyBank() {
 
         {activeTab === 'transactions' && (
           <div className="space-y-6">
-            <h1 className="text-xl font-bold text-stone-800">History</h1>
+            <h1 className="text-xl font-bold text-slate-800">History</h1>
             
             {/* Search and Filter */}
             <div className="space-y-3">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search transactions..."
-                  className="w-full pl-12 pr-4 py-3 bg-white border border-stone-200 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
               
@@ -930,8 +930,8 @@ export default function FamilyBank() {
                     onClick={() => setFilterType(filter.id)}
                     className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                       filterType === filter.id
-                        ? 'bg-amber-500 text-white'
-                        : 'bg-white text-stone-600 border border-stone-200'
+                        ? 'bg-violet-500 text-white'
+                        : 'bg-white text-slate-600 border border-slate-200'
                     }`}
                   >
                     {filter.label}
@@ -941,11 +941,11 @@ export default function FamilyBank() {
             </div>
             
             {filteredTransactions.length > 0 ? (
-              <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+              <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
                 {filteredTransactions.map((t, i) => {
                   const child = children.find(c => c.id === t.child);
                   return (
-                    <div key={t.id} className={i !== 0 ? 'border-t border-stone-100' : ''}>
+                    <div key={t.id} className={i !== 0 ? 'border-t border-slate-100' : ''}>
                       <TransactionItem
                         transaction={t}
                         child={child}
@@ -958,7 +958,7 @@ export default function FamilyBank() {
                 })}
               </div>
             ) : (
-              <div className="bg-white rounded-2xl border border-stone-200">
+              <div className="bg-white rounded-2xl border border-slate-200">
                 <EmptyState
                   icon={History}
                   title="No transactions found"
@@ -971,9 +971,9 @@ export default function FamilyBank() {
 
         {activeTab === 'settings' && (
           <div className="space-y-6">
-            <h1 className="text-xl font-bold text-stone-800">Settings</h1>
+            <h1 className="text-xl font-bold text-slate-800">Settings</h1>
             
-            <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
               {[
                 { 
                   label: 'Interest Rate', 
@@ -993,16 +993,16 @@ export default function FamilyBank() {
                 <button
                   key={item.label}
                   onClick={item.action}
-                  className={`w-full flex items-center justify-between p-4 ${i !== arr.length - 1 ? 'border-b border-stone-100' : ''}`}
+                  className={`w-full flex items-center justify-between p-4 ${i !== arr.length - 1 ? 'border-b border-slate-100' : ''}`}
                 >
-                  <span className="text-stone-800">{item.label}</span>
-                  <span className="text-stone-500">{item.value}</span>
+                  <span className="text-slate-800">{item.label}</span>
+                  <span className="text-slate-500">{item.value}</span>
                 </button>
               ))}
             </div>
             
             {/* Data Export */}
-            <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
               <button
                 onClick={() => {
                   exportData(children, transactions, goals, settings);
@@ -1015,16 +1015,16 @@ export default function FamilyBank() {
                     <Download className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div className="text-left">
-                    <div className="text-stone-800 font-medium">Export Data</div>
-                    <div className="text-sm text-stone-500">Download backup as JSON</div>
+                    <div className="text-slate-800 font-medium">Export Data</div>
+                    <div className="text-sm text-slate-500">Download backup as JSON</div>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-stone-400" />
+                <ChevronRight className="w-5 h-5 text-slate-400" />
               </button>
             </div>
             
             {/* Clear Data */}
-            <div className="bg-white rounded-2xl border border-stone-200 overflow-hidden">
+            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
               <button
                 onClick={() => {
                   if (confirm('Are you sure? This will reset all data to defaults.')) {
@@ -1119,8 +1119,8 @@ function DepositModal({ children, selectedChild, goals, onClose, onDeposit, onSe
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-stone-800">Add Money</h2>
-          <button onClick={onClose}><X className="w-6 h-6 text-stone-400" /></button>
+          <h2 className="text-xl font-bold text-slate-800">Add Money</h2>
+          <button onClick={onClose}><X className="w-6 h-6 text-slate-400" /></button>
         </div>
 
         <div className="space-y-4">
@@ -1136,22 +1136,22 @@ function DepositModal({ children, selectedChild, goals, onClose, onDeposit, onSe
           />
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Amount</label>
+            <label className="block text-sm text-slate-500 mb-2">Amount</label>
             <div className="relative">
-              <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+              <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
               <input
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full pl-12 pr-4 py-4 bg-stone-100 rounded-2xl text-2xl font-bold text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full pl-12 pr-4 py-4 bg-slate-100 rounded-2xl text-2xl font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 autoFocus
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Category</label>
+            <label className="block text-sm text-slate-500 mb-2">Category</label>
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
               {TRANSACTION_CATEGORIES.deposit.map(cat => (
                 <button
@@ -1159,8 +1159,8 @@ function DepositModal({ children, selectedChild, goals, onClose, onDeposit, onSe
                   onClick={() => setCategory(cat.id)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-colors ${
                     category === cat.id 
-                      ? 'bg-amber-500 text-white' 
-                      : 'bg-stone-100 text-stone-600'
+                      ? 'bg-violet-500 text-white' 
+                      : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   <span>{cat.icon}</span>
@@ -1171,26 +1171,26 @@ function DepositModal({ children, selectedChild, goals, onClose, onDeposit, onSe
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Note</label>
+            <label className="block text-sm text-slate-500 mb-2">Note</label>
             <input
               type="text"
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="What's this for?"
-              className="w-full px-4 py-3 bg-stone-100 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-3 bg-slate-100 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
 
           {childGoalsList.length > 0 && (
             <div>
-              <label className="block text-sm text-stone-500 mb-2">Add to goal</label>
+              <label className="block text-sm text-slate-500 mb-2">Add to goal</label>
               <div className="flex gap-2 overflow-x-auto scrollbar-hide">
                 <button
                   onClick={() => setSelectedGoal(null)}
                   className={`px-4 py-2 rounded-xl text-sm whitespace-nowrap ${
                     selectedGoal === null 
-                      ? 'bg-amber-500 text-white' 
-                      : 'bg-stone-100 text-stone-600'
+                      ? 'bg-violet-500 text-white' 
+                      : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   Just balance
@@ -1201,8 +1201,8 @@ function DepositModal({ children, selectedChild, goals, onClose, onDeposit, onSe
                     onClick={() => setSelectedGoal(goal.id)}
                     className={`px-4 py-2 rounded-xl text-sm whitespace-nowrap flex items-center gap-2 ${
                       selectedGoal === goal.id 
-                        ? 'bg-amber-500 text-white' 
-                        : 'bg-stone-100 text-stone-600'
+                        ? 'bg-violet-500 text-white' 
+                        : 'bg-slate-100 text-slate-600'
                     }`}
                   >
                     <span>{goal.icon}</span>
@@ -1217,7 +1217,7 @@ function DepositModal({ children, selectedChild, goals, onClose, onDeposit, onSe
         <button
           onClick={handleSubmit}
           disabled={!amount || parseFloat(amount) <= 0}
-          className="w-full mt-6 py-4 bg-stone-800 text-white font-semibold rounded-2xl disabled:opacity-50"
+          className="w-full mt-6 py-4 bg-slate-800 text-white font-semibold rounded-2xl disabled:opacity-50"
         >
           Add ${amount || '0'} to {currentChild?.name}'s account
         </button>
@@ -1247,8 +1247,8 @@ function WithdrawModal({ children, selectedChild, onClose, onWithdraw, onSelectC
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-stone-800">Spend</h2>
-          <button onClick={onClose}><X className="w-6 h-6 text-stone-400" /></button>
+          <h2 className="text-xl font-bold text-slate-800">Spend</h2>
+          <button onClick={onClose}><X className="w-6 h-6 text-slate-400" /></button>
         </div>
 
         <div className="space-y-4">
@@ -1260,21 +1260,21 @@ function WithdrawModal({ children, selectedChild, onClose, onWithdraw, onSelectC
             onSelect={setChildId}
           />
 
-          <div className="p-4 bg-stone-100 rounded-2xl">
-            <div className="text-sm text-stone-500">Available</div>
-            <div className="text-2xl font-bold text-stone-800">${currentChild?.balance.toFixed(2)}</div>
+          <div className="p-4 bg-slate-100 rounded-2xl">
+            <div className="text-sm text-slate-500">Available</div>
+            <div className="text-2xl font-bold text-slate-800">${currentChild?.balance.toFixed(2)}</div>
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Amount</label>
+            <label className="block text-sm text-slate-500 mb-2">Amount</label>
             <div className="relative">
-              <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+              <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
               <input
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full pl-12 pr-4 py-4 bg-stone-100 rounded-2xl text-2xl font-bold text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full pl-12 pr-4 py-4 bg-slate-100 rounded-2xl text-2xl font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 autoFocus
               />
             </div>
@@ -1284,7 +1284,7 @@ function WithdrawModal({ children, selectedChild, onClose, onWithdraw, onSelectC
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Category</label>
+            <label className="block text-sm text-slate-500 mb-2">Category</label>
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
               {TRANSACTION_CATEGORIES.withdrawal.map(cat => (
                 <button
@@ -1293,7 +1293,7 @@ function WithdrawModal({ children, selectedChild, onClose, onWithdraw, onSelectC
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-colors ${
                     category === cat.id 
                       ? 'bg-rose-500 text-white' 
-                      : 'bg-stone-100 text-stone-600'
+                      : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   <span>{cat.icon}</span>
@@ -1304,13 +1304,13 @@ function WithdrawModal({ children, selectedChild, onClose, onWithdraw, onSelectC
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">What for?</label>
+            <label className="block text-sm text-slate-500 mb-2">What for?</label>
             <input
               type="text"
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="e.g., Toy store"
-              className="w-full px-4 py-3 bg-stone-100 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-3 bg-slate-100 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
         </div>
@@ -1318,7 +1318,7 @@ function WithdrawModal({ children, selectedChild, onClose, onWithdraw, onSelectC
         <button
           onClick={handleSubmit}
           disabled={!amount || parseFloat(amount) <= 0 || parseFloat(amount) > currentChild?.balance}
-          className="w-full mt-6 py-4 bg-stone-800 text-white font-semibold rounded-2xl disabled:opacity-50"
+          className="w-full mt-6 py-4 bg-slate-800 text-white font-semibold rounded-2xl disabled:opacity-50"
         >
           Spend ${amount || '0'} from {currentChild?.name}'s account
         </button>
@@ -1347,27 +1347,27 @@ function EditTransactionModal({ transaction, onClose, onSave }) {
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       <div className="relative bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-stone-800">Edit Transaction</h2>
-          <button onClick={onClose}><X className="w-6 h-6 text-stone-400" /></button>
+          <h2 className="text-xl font-bold text-slate-800">Edit Transaction</h2>
+          <button onClick={onClose}><X className="w-6 h-6 text-slate-400" /></button>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Amount</label>
+            <label className="block text-sm text-slate-500 mb-2">Amount</label>
             <div className="relative">
-              <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+              <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
               <input
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-stone-100 rounded-2xl text-2xl font-bold text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full pl-12 pr-4 py-4 bg-slate-100 rounded-2xl text-2xl font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 autoFocus
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Category</label>
+            <label className="block text-sm text-slate-500 mb-2">Category</label>
             <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
               {categories.map(cat => (
                 <button
@@ -1375,8 +1375,8 @@ function EditTransactionModal({ transaction, onClose, onSave }) {
                   onClick={() => setCategory(cat.id)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm whitespace-nowrap transition-colors ${
                     category === cat.id 
-                      ? transaction.type === 'withdrawal' ? 'bg-rose-500 text-white' : 'bg-amber-500 text-white'
-                      : 'bg-stone-100 text-stone-600'
+                      ? transaction.type === 'withdrawal' ? 'bg-rose-500 text-white' : 'bg-violet-500 text-white'
+                      : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   <span>{cat.icon}</span>
@@ -1387,12 +1387,12 @@ function EditTransactionModal({ transaction, onClose, onSave }) {
           </div>
 
           <div>
-            <label className="block text-sm text-stone-500 mb-2">Note</label>
+            <label className="block text-sm text-slate-500 mb-2">Note</label>
             <input
               type="text"
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="w-full px-4 py-3 bg-stone-100 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full px-4 py-3 bg-slate-100 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
           </div>
         </div>
@@ -1400,7 +1400,7 @@ function EditTransactionModal({ transaction, onClose, onSave }) {
         <button
           onClick={handleSubmit}
           disabled={!amount || parseFloat(amount) <= 0}
-          className="w-full mt-6 py-4 bg-stone-800 text-white font-semibold rounded-2xl disabled:opacity-50"
+          className="w-full mt-6 py-4 bg-slate-800 text-white font-semibold rounded-2xl disabled:opacity-50"
         >
           Save Changes
         </button>
