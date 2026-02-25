@@ -7,28 +7,25 @@ export function ChildAvatar({ child, isSelected, onClick }) {
     sam: { bg: 'bg-gradient-to-br from-sky-400 to-blue-500', ring: 'ring-sky-300' },
     default: { bg: 'bg-gradient-to-br from-stone-400 to-stone-500', ring: 'ring-stone-300' }
   };
-  
+
   const color = colors[child.id] || colors.default;
-  
+
   return (
     <button
       onClick={onClick}
-      className={`relative group transition-all duration-300 ${isSelected ? 'scale-105' : 'hover:scale-102'}`}
+      className={`relative group transition-all duration-300 flex-shrink-0 ${isSelected ? 'scale-105' : 'hover:scale-102'}`}
     >
-      <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full ${color.bg} 
+      <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full ${color.bg}
         flex items-center justify-center text-white text-2xl sm:text-3xl font-bold shadow-lg
-        ${isSelected ? `ring-4 ${color.ring} ring-offset-2 ring-offset-amber-50 animate-pulse-glow` : 'hover:shadow-xl'}
+        ${isSelected ? `ring-4 ${color.ring} ring-offset-2 ring-offset-amber-50` : 'hover:shadow-xl'}
         transition-all duration-300`}
       >
         {child.name[0]}
       </div>
-      <div className={`mt-2 text-center transition-all duration-300 ${isSelected ? 'opacity-100' : 'opacity-60'}`}>
+      <div className={`mt-3 text-center transition-all duration-300 ${isSelected ? 'opacity-100' : 'opacity-60'}`}>
         <div className="font-semibold text-stone-800 text-sm">{child.name}</div>
         <div className="text-xs text-stone-500">Age {child.age}</div>
       </div>
-      {isSelected && (
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-amber-400 rounded-full" />
-      )}
     </button>
   );
 }

@@ -693,7 +693,7 @@ export default function FamilyBank() {
                   }`}
                 >
                   <tab.icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''} transition-transform`} />
-                  <span className={`text-xs mt-1 ${isActive ? 'font-medium' : 'hidden'}`}>
+                  <span className={`text-xs mt-1 ${isActive ? 'font-medium' : ''}`}>
                     {tab.label}
                   </span>
                 </button>
@@ -708,8 +708,8 @@ export default function FamilyBank() {
         {activeTab === 'dashboard' && (
           <div className="space-y-6">
             {/* Child Selector */}
-            <section>
-              <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
+            <section className="py-2">
+              <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 px-1">
                 {children.map(child => (
                   <ChildAvatar
                     key={child.id}
