@@ -426,6 +426,7 @@ export default function FamilyBank() {
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
   
   // Load data from localStorage on mount
   useEffect(() => {
@@ -656,7 +657,7 @@ export default function FamilyBank() {
     { id: 'dashboard', icon: Home, label: 'Home' },
     { id: 'transactions', icon: History, label: 'Activities' },
     { id: 'goals', icon: Target, label: 'Goals' },
-    { id: 'settings', icon: Settings, label: 'Settings' },
+    { id: 'learn', icon: Sparkles, label: 'Learn' },
   ];
 
   return (
@@ -673,9 +674,88 @@ export default function FamilyBank() {
             </div>
             <span className="font-semibold text-slate-800">Family Bank</span>
           </div>
-          <button className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-            <User className="w-4 h-4 text-slate-500" />
-          </button>
+          <div className="relative" ref={accountMenuRef}>
+            <button 
+              onClick={() => setShowAccountMenu(!showAccountMenu)}
+              className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors"
+            >
+              <User className="w-4 h-4 text-slate-500" />
+            </button>
+            
+            {/* Account Menu Dropdown */}
+            {showAccountMenu && (
+              <div className="absolute right-0 top-10 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 py-2 z-50">
+                <div className="px-4 py-3 border-b border-slate-100">
+                  <div className="font-semibold text-slate-800">My Account</div>
+                  <div className="text-xs text-slate-500">Parent Dashboard</div>
+                </div>
+                
+                <button
+                  onClick={() => {
+                    setActiveTab('dashboard');
+                    setShowAccountMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+                >
+                  <Home className="w-4 h-4 text-slate-500" />
+                  <span className="text-slate-700">Dashboard</span>
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const newRate = prompt('Enter new interest rate (%):', settings.interestRate);
+                    if (newRate && !isNaN(newRate)) {
+                      setSettings({ ...settings, interestRate: parseFloat(newRate) });
+                      showToast(`Interest rate updated to ${newRate}%`);
+                    }
+                    setShowAccountMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+                >
+                  <TrendingUp className="w-4 h-4 text-slate-500" />
+                  <div className="flex-1 text-left">
+                    <div className="text-slate-700">Interest Rate</div>
+                    <div className="text-xs text-slate-400">{settings.interestRate}%</div>
+                  </div>
+                </button>
+                
+                <button
+                  onClick={() => {
+                    exportData(children, transactions, goals, settings);
+                    showToast('Data exported successfully');
+                    setShowAccountMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+                >
+                  <Download className="w-4 h-4 text-slate-500" />
+                  <span className="text-slate-700">Export Data</span>
+                </button>
+                
+                <div className="border-t border-slate-100 my-2"></div>
+                
+                <button
+                  onClick={() => {
+                    if (confirm('Are you sure? This will reset all data to defaults.')) {
+                      localStorage.removeItem(STORAGE_KEYS.CHILDREN);
+                      localStorage.removeItem(STORAGE_KEYS.TRANSACTIONS);
+                      localStorage.removeItem(STORAGE_KEYS.GOALS);
+                      localStorage.removeItem(STORAGE_KEYS.SETTINGS);
+                      setChildren(DEFAULT_CHILDREN);
+                      setTransactions(DEFAULT_TRANSACTIONS);
+                      setGoals(DEFAULT_GOALS);
+                      setSettings(DEFAULT_SETTINGS);
+                      showToast('Data reset to defaults');
+                    }
+                    setShowAccountMenu(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 hover:bg-rose-50 text-rose-600 transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  <span>Reset All Data</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -978,88 +1058,38 @@ export default function FamilyBank() {
           </div>
         )}
 
-        {activeTab === 'settings' && (
+        {activeTab === 'learn' && (
           <div className="space-y-6">
-            <h1 className="text-xl font-bold text-slate-800">Settings</h1>
-            
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
-              {[
-                { 
-                  label: 'Interest Rate', 
-                  value: `${settings.interestRate}%`, 
-                  action: () => {
-                    const newRate = prompt('Enter new interest rate (%):', settings.interestRate);
-                    if (newRate && !isNaN(newRate)) {
-                      setSettings({ ...settings, interestRate: parseFloat(newRate) });
-                      showToast(`Interest rate updated to ${newRate}%`);
-                    }
-                  }
-                },
-                { label: 'Notifications', value: 'On', action: () => showToast('Notification settings coming soon!') },
-                { label: 'Currency', value: settings.currency, action: () => showToast('Currency settings coming soon!') },
-                { label: 'About', value: 'v1.0', action: () => showToast('Family Bank v1.0') },
-              ].map((item, i, arr) => (
-                <button
-                  key={item.label}
-                  onClick={item.action}
-                  className={`w-full flex items-center justify-between p-4 ${i !== arr.length - 1 ? 'border-b border-slate-100' : ''}`}
-                >
-                  <span className="text-slate-800">{item.label}</span>
-                  <span className="text-slate-500">{item.value}</span>
-                </button>
-              ))}
-            </div>
-            
-            {/* Data Export */}
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
-              <button
-                onClick={() => {
-                  exportData(children, transactions, goals, settings);
-                  showToast('Data exported successfully');
-                }}
-                className="w-full flex items-center justify-between p-4"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
-                    <Download className="w-5 h-5 text-emerald-600" />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-slate-800 font-medium">Export Data</div>
-                    <div className="text-sm text-slate-500">Download backup as JSON</div>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-slate-400" />
-              </button>
-            </div>
-            
-            {/* Clear Data */}
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
-              <button
-                onClick={() => {
-                  if (confirm('Are you sure? This will reset all data to defaults.')) {
-                    localStorage.removeItem(STORAGE_KEYS.CHILDREN);
-                    localStorage.removeItem(STORAGE_KEYS.TRANSACTIONS);
-                    localStorage.removeItem(STORAGE_KEYS.GOALS);
-                    localStorage.removeItem(STORAGE_KEYS.SETTINGS);
-                    setChildren(DEFAULT_CHILDREN);
-                    setTransactions(DEFAULT_TRANSACTIONS);
-                    setGoals(DEFAULT_GOALS);
-                    setSettings(DEFAULT_SETTINGS);
-                    showToast('Data reset to defaults');
-                  }
-                }}
-                className="w-full flex items-center justify-between p-4 text-rose-600"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center">
-                    <Trash2 className="w-5 h-5 text-rose-600" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium">Reset All Data</div>
-                    <div className="text-sm text-rose-400">Clear local storage</div>
-                  </div>
-                </div>
-              </button>
+            <div className="text-center py-12">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-violet-100 flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-violet-500" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-800 mb-2">Money Quests</h2>
+              <p className="text-slate-500 mb-6">Learn about money through fun challenges!</p>
+              
+              <div className="space-y-3">
+                {[
+                  { title: 'Needs vs Wants', level: 'Beginner', icon: '🎯', color: 'bg-emerald-100 text-emerald-600' },
+                  { title: 'Saving Basics', level: 'Beginner', icon: '💰', color: 'bg-blue-100 text-blue-600' },
+                  { title: 'Budgeting 101', level: 'Intermediate', icon: '📊', color: 'bg-violet-100 text-violet-600' },
+                  { title: 'Compound Interest', level: 'Advanced', icon: '📈', color: 'bg-amber-100 text-amber-600' },
+                ].map((quest, i) => (
+                  <button
+                    key={i}
+                    onClick={() => showToast(`${quest.title} - Coming soon!`)}
+                    className="w-full bg-white rounded-2xl p-4 border border-slate-200 flex items-center gap-4 hover:shadow-md transition-shadow"
+                  >
+                    <div className={`w-12 h-12 rounded-xl ${quest.color} flex items-center justify-center text-2xl`}>
+                      {quest.icon}
+                    </div>
+                    <div className="flex-1 text-left">
+                      <div className="font-semibold text-slate-800">{quest.title}</div>
+                      <div className="text-xs text-slate-500">{quest.level}</div>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-slate-400" />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}
