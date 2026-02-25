@@ -427,6 +427,7 @@ export default function FamilyBank() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const accountMenuRef = useRef(null);
   
   // Load data from localStorage on mount
   useEffect(() => {
@@ -466,6 +467,17 @@ export default function FamilyBank() {
       saveToStorage(STORAGE_KEYS.SETTINGS, settings);
     }
   }, [settings, isLoaded]);
+
+  // Close account menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        setShowAccountMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   
   // Apply monthly interest
   useEffect(() => {
