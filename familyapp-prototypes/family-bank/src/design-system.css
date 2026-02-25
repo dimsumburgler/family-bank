@@ -1,0 +1,118 @@
+/* Family Bank Design System */
+
+:root {
+  /* Warm, tactile palette */
+  --cream-50: #FFFBF5;
+  --cream-100: #FFF5E6;
+  --cream-200: #FFE8CC;
+  
+  --gold-100: #FEF3C7;
+  --gold-300: #FCD34D;
+  --gold-400: #FBBF24;
+  --gold-500: #F59E0B;
+  --gold-600: #D97706;
+  
+  --sage-50: #F0FDF4;
+  --sage-100: #DCFCE7;
+  --sage-200: #BBF7D0;
+  --sage-500: #22C55E;
+  --sage-600: #16A34A;
+  
+  --coral-50: #FFF1F2;
+  --coral-100: #FFE4E6;
+  --coral-500: #F43F5E;
+  
+  --stone-100: #F5F5F4;
+  --stone-200: #E7E5E4;
+  --stone-400: #A8A29E;
+  --stone-600: #57534E;
+  --stone-800: #292524;
+  --stone-900: #1C1917;
+  
+  /* Soft shadows for elevation */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgba(251, 191, 36, 0.3);
+  
+  /* Rounded corners - generous, friendly */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+}
+
+/* Smooth, organic transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar - minimal, elegant */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Floating animation for active elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow for achievements */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(251, 191, 36, 0.1); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Number count-up animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count {
+  animation: count-up 0.5s ease-out;
+}
+
+/* Soft background gradient */
+.bg-cream-gradient {
+  background: linear-gradient(180deg, var(--cream-50) 0%, var(--cream-100) 100%);
+}
+
+/* Glass morphism for overlays */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Tactile button press */
+.btn-tactile {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-tactile:active {
+  transform: scale(0.98);
+}
+
+/* Progress fill animation */
+@keyframes fill-progress {
+  from { width: 0%; }
+}
+
+.progress-animate {
+  animation: fill-progress 1s ease-out forwards;
+}

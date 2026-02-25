@@ -1,0 +1,8 @@
+{
+  "name": "family-bank",
+  "version": 2,
+  "public": true,
+  "github": {
+    "enabled": false
+  }
+}
