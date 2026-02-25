@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import './src/design-system.css';
 import { ChildAvatar, AddChildAvatar } from './src/AvatarIllustrations.jsx';
+import { BalanceChart } from './src/BalanceChart.jsx';
 import confetti from 'canvas-confetti';
 
 // ============================================
@@ -753,6 +754,14 @@ export default function FamilyBank() {
                 </div>
                 <div className="text-2xl font-semibold text-slate-800">{settings.interestRate}%</div>
               </div>
+            </section>
+
+            {/* Balance Chart */}
+            <section>
+              <BalanceChart 
+                currentBalance={currentChild?.balance || 0} 
+                childName={currentChild?.name}
+              />
             </section>
 
             {/* Quick Actions */}
