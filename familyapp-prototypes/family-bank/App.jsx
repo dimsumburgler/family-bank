@@ -3,7 +3,7 @@ import {
   Wallet, PiggyBank, TrendingUp, User, Plus, Minus, History, Target, 
   ChevronRight, DollarSign, X, Edit2, Trash2, Home, Settings,
   Sparkles, PiggyBank as SavingsIcon, Search, Download,
-  MoreVertical, Check, ChevronDown
+  MoreVertical, Check, ChevronDown, BadgeDollarSign
 } from 'lucide-react';
 import './src/design-system.css';
 import { ChildAvatar, AddChildAvatar } from './src/AvatarIllustrations.jsx';
@@ -667,7 +667,7 @@ export default function FamilyBank() {
 
   const tabs = [
     { id: 'dashboard', icon: Home, label: 'Home' },
-    { id: 'transactions', icon: History, label: 'Activities' },
+    { id: 'transactions', icon: BadgeDollarSign, label: 'Activities' },
     { id: 'goals', icon: Target, label: 'Goals' },
     { id: 'learn', icon: Sparkles, label: 'Learn' },
   ];
